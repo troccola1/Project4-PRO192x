@@ -31,8 +31,8 @@ public class Service {
 		depts.add(d2);
 		depts.add(d3);
 
-//		staffs.add(new Employee("IT 1", "ThangNH", 33, 5, "20/12/2020", 1, 5, 3));
-//		staffs.add(new Employee("IT 2", "ThangNH2", 323, 3, "20/12/2020", 1, 2, 1));
+		staffs.add(new Employee("IT 1", "TrongBB", 19, 5, "16/08/2020", 1, 5, 3));
+		staffs.add(new Employee("IT 2", "TrongBB", 20, 3, "01/09/2020", 1, 2, 1));
 	}
 
 	public void displayStaff() {
@@ -40,13 +40,17 @@ public class Service {
 		System.out.println(String.format("%-10s%-20s%-10s%-15s%-15s%-15s%-10s", "ID", "Tên", "Tuổi", "Ngày làm",
 				"ID bộ phận", "Ngày nghỉ", "Chức vụ/Tăng ca"));
 		for (Staff staff : staffs) {
-			System.out.println(staff.toString());
+			if (staff instanceof Manager) {
+				System.out.println(((Manager) staff).toString());
+			} else if (staff instanceof Employee) {
+				System.out.println(((Employee) staff).toString());
+			}
 		}
 	}
 
 	public void displayDepartment() {
 		// viết code hiển thị thông tin các bộ phận
-		System.out.println("Lựa chọn của bạn:");
+		System.out.println("Các bộ phận trong công ty bao gồm.");
 		for (Department dept : depts) {
 			System.out.println(dept.getPartCode() + ". " + dept.getPartName());
 		}
@@ -54,10 +58,18 @@ public class Service {
 
 	public void displayStaffByDepartment() {
 //		viết code hiển thị thông tin nhân viên theo từng bộ phận
+		
+		
+		
 		for (Department dept : depts) {
+			
 			System.out.println(dept.getPartCode() + ". " + dept.getPartName());
-			System.out.println("------------------------------------------------------------------------------");
+			System.out.println("----------------------------------------------------------------------------------------------------");
 //			hiển thị thông tin bộ phận (bằng hàm toString của class Department);
+			System.out.println(String.format("%-10s%-20s%-10s%-15s%-15s%-15s%-10s", "ID", "Tên", "Tuổi", "Ngày làm",
+					"ID bộ phận", "Ngày nghỉ", "Chức vụ/Tăng ca"));
+			System.out.println("----------------------------------------------------------------------------------------------------");
+			
 			for (Staff staff : staffs) {
 				if (dept.getPartCode() == staff.getDepartmentId()) {
 					System.out.println(staff.toString());
@@ -113,7 +125,7 @@ public class Service {
 		System.out.println("2. Quản lý");
 		System.out.print("Lựa chọn của bạn: ");
 
-		selection = inputData("", 1, 2);
+		selection = inputData("Lựa chọn của bạn: ", 1, 2);
 		if (selection == 1) {
 			System.out.print("Tăng ca: ");
 			overtime = scan.nextInt();
@@ -122,10 +134,11 @@ public class Service {
 			staffs.add(emp);
 		} else if (selection == 2) {
 //			Chức vụ trong công ty
-			System.out.println("Chức vụ: ");
+			System.out.println("Chức vụ của bạn là: ");
 			System.out.println("1. Business Leader(Trưởng phòng kinh doanh).");
 			System.out.println("2. Project Leader(Lãnh đạo dự án).");
 			System.out.println("3. Technical Leader");
+			System.out.print("Lựa chọn của bạn là: ");
 			if (scan.hasNextInt()) {
 				int position_input = inputData("", 1, 3);
 				if (position_input == 1) {
@@ -193,42 +206,83 @@ public class Service {
 	}
 
 	public void showSalaryDesc() {
-		
+
 		Collections.sort(staffs, new Comparator<Staff>() {
 			@Override
 			public int compare(Staff o1, Staff o2) {
 				// TODO Auto-generated method stub
 				long salaryO1;
 				long salaryO2;
-				if(o1 instanceof Manager) {
+				if (o1 instanceof Manager) {
 					salaryO1 = ((Manager) o1).calculateSalary();
 				} else {
 					salaryO1 = ((Employee) o1).calculateSalary();
 				}
-				
-				salaryO2 = (o2 instanceof Manager) ? ((Manager) o2).calculateSalary() : ((Employee) o2).calculateSalary();
-				
-				return (int) (salaryO2 - salaryO1) ;
+
+				salaryO2 = (o2 instanceof Manager) ? ((Manager) o2).calculateSalary()
+						: ((Employee) o2).calculateSalary();
+
+				return (int) (salaryO2 - salaryO1);
 			}
 		});
-		
+
 //		In ra toàn bộ lương nhân viên toàn công ty
-		toString();
-		
+
+		System.out.println(String.format("%-10s%-20s%-10s", "ID", "Tên", "Lương"));
+
 		for (Staff staff : staffs) {
 			if (staff instanceof Employee) {
-				System.out.println(((Employee) staff).calculateSalary());
+				Employee e = (Employee) staff;
+				System.out.println(String.format("%-10s%-20s%-10d", e.getId(), e.getName(), e.calculateSalary()));
+
 			}
+
 			if (staff instanceof Manager) {
-				System.out.println(((Manager) staff).calculateSalary());
+				Manager m = (Manager) staff;
+				System.out.println(String.format("%-10s%-20s%-10d", m.getId(), m.getName(), m.calculateSalary()));
+
 			}
 		}
-
 
 	}
 
 	public void showSalaryAsc() {
-//		Collections.sort(staffs, Comparator.comparingLong(Staff::getSalary));
+		Collections.sort(staffs, new Comparator<Staff>() {
+			@Override
+			public int compare(Staff o1, Staff o2) {
+				// TODO Auto-generated method stub
+				long salaryO1;
+				long salaryO2;
+				if (o1 instanceof Manager) {
+					salaryO1 = ((Manager) o1).calculateSalary();
+				} else {
+					salaryO1 = ((Employee) o1).calculateSalary();
+				}
+
+				salaryO2 = (o2 instanceof Manager) ? ((Manager) o2).calculateSalary()
+						: ((Employee) o2).calculateSalary();
+
+				return (int) (salaryO1 - salaryO2);
+			}
+		});
+
+//		In ra toàn bộ lương nhân viên toàn công ty
+
+		System.out.println(String.format("%-10s%-20s%-10s", "ID", "Tên", "Lương"));
+
+		for (Staff staff : staffs) {
+			if (staff instanceof Employee) {
+				Employee e = (Employee) staff;
+				System.out.println(String.format("%-10s%-20s%-10d", e.getId(), e.getName(), e.calculateSalary()));
+
+			}
+
+			if (staff instanceof Manager) {
+				Manager m = (Manager) staff;
+				System.out.println(String.format("%-10s%-20s%-10d", m.getId(), m.getName(), m.calculateSalary()));
+
+			}
+		}
 	}
 
 }

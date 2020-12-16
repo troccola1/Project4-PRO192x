@@ -25,7 +25,7 @@ public class Employee extends Staff implements ICalculator {
 
 	@Override
 	public String toString() {
-		System.out.println(String.format("%-10s%-20s%-10s%-15s%-15s%-15s%-10s", "ID", "Tên", "Tuổi", "Ngày làm", "ID bộ phận", "Ngày nghỉ", "Tăng ca"));
-		return String.format("%-10s%-20s%-10d%-15s%-15s%-15d%-10", id, name, age, workingDay, departmentId, dayOff, overtime);
+		return String.format("%-10s%-20s%-10d%-15s%-15s%-15d%-10d", id, name, age, workingDay, departmentId, dayOff,
+				overtime);
 	}
 }

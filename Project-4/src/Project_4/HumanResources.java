@@ -3,20 +3,19 @@ package Project_4;
 import java.util.Scanner;
 
 public class HumanResources {
-	
+	static Scanner scan;
+
 	public static void main(String[] args) {
-		try
-		{
+		try {
 			Service service = new Service();
-			Scanner scan = new Scanner(System.in);
+			scan = new Scanner(System.in);
 			int choice = 0;
 			boolean isRunning = true;
 			System.out.println("Chào mừng các bạn đến với ứng dụng quản lý nguồn nhân lực Human Resources.");
-			
+
 			while (isRunning) {
-				try
-				{
-					System.out.println("------------------------------------------------------------------------------");
+				try {
+					System.out.println("----------------------------------------------------------------------------------------------------");
 					System.out.println("1. Danh sách nhân viên có trong công ty.");
 					System.out.println("2. Các bộ phận trong công ty.");
 					System.out.println("3. Các nhân viên theo từng bộ phận.");
@@ -26,7 +25,7 @@ public class HumanResources {
 					System.out.println("7. Hiển thị bảng lương nhân viên theo thứ tự tăng dần.");
 					System.out.println("8. Lối ra.");
 					System.out.print("Lựa chọn của bạn: ");
-					
+
 					if (scan.hasNextInt()) {
 						choice = scan.nextInt();
 						switch (choice) {
@@ -50,24 +49,22 @@ public class HumanResources {
 							service.showSalaryDesc();
 							break;
 						case 7:
-							
+							service.showSalaryAsc();
 							break;
 						case 8:
 							isRunning = false;
+							break;
 						}
 					} else {
 						scan.nextLine();
 					}
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					// TODO: handle exception
 					System.out.println(e.getMessage());
 				}
 			}
-			
-			
-		}
-		catch (Exception e) {
+
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}

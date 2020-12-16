@@ -1,16 +1,16 @@
- package Project_4;
+package Project_4;
 
 public abstract class Staff {
-	
+
 	protected String id;
 	protected String name;
 	protected int age;
-	protected int coeffSalary ;
+	protected int coeffSalary;
 	protected String workingDay;
 	protected int departmentId;
 	protected int dayOff;
-	
- 	public String getId() {
+
+	public String getId() {
 		return id;
 	}
 
@@ -34,14 +34,13 @@ public abstract class Staff {
 		this.age = age;
 	}
 
-	public int getCoeffSalary () {
-		return coeffSalary ;
+	public int getCoeffSalary() {
+		return coeffSalary;
 	}
 
-	public void setCoffSalary (int coeffSalary ) {
-		this.coeffSalary  = coeffSalary ;
+	public void setCoffSalary(int coeffSalary) {
+		this.coeffSalary = coeffSalary;
 	}
-	
 
 	public String getWorkingDay() {
 		return workingDay;
@@ -62,17 +61,16 @@ public abstract class Staff {
 	public int getDayOff() {
 		return dayOff;
 	}
-	
+
 	public void setDayOff(int dayOff) {
 		this.dayOff = dayOff;
 	}
-
 
 	public Staff(String id, String name, int age, int coeffSalary, String workingDay, int departmentId, int dayOff) {
 		this.id = id;
 		this.name = name;
 		this.age = age;
-		this.coeffSalary  = coeffSalary;
+		this.coeffSalary = coeffSalary;
 		this.workingDay = workingDay;
 		this.departmentId = departmentId;
 		this.dayOff = dayOff;
