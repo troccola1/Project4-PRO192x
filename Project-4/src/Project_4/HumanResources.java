@@ -16,12 +16,12 @@ public class HumanResources {
 			while (isRunning) {
 				try
 				{
-					System.out.println("------------------------------------------------------------");
+					System.out.println("------------------------------------------------------------------------------");
 					System.out.println("1. Danh sách nhân viên có trong công ty.");
 					System.out.println("2. Các bộ phận trong công ty.");
 					System.out.println("3. Các nhân viên theo từng bộ phận.");
 					System.out.println("4. Thêm nhân viên mới.");
-					System.out.println("5. Tìm kiếm thông tin nhân viên bằng tên hoặc mã nhân viên.");
+					System.out.println("5. Tìm kiếm thông tin nhân viên bằng mã nhân viên.");
 					System.out.println("6. Bảng lương nhân viên toàn công ty.");
 					System.out.println("7. Hiển thị bảng lương nhân viên theo thứ tự tăng dần.");
 					System.out.println("8. Lối ra.");
@@ -47,7 +47,7 @@ public class HumanResources {
 							service.search(searchId);
 							break;
 						case 6:
-		//					Service.showSalaryDesc();
+							service.showSalaryDesc();
 							break;
 						case 7:
 							

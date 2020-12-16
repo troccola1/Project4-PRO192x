@@ -19,13 +19,13 @@ public class Employee extends Staff implements ICalculator {
 	}
 
 	@Override
-	public void calculateSalary() {
-		this.setSalary(this.getCoeffSalary() * 3000000 + overtime * 200000);
+	public long calculateSalary() {
+		return (long) (getCoeffSalary() * 3000000 + overtime * 200000);
 	}
 
 	@Override
 	public String toString() {
-		System.out.println(String.format("%-7s%-10s%-10s%-15s%-15s%-15s%-10s", "ID", "Tên", "Tuổi", "Ngày làm", "ID bộ phận", "Ngày nghỉ", "Tăng ca"));
-		return String.format("%-7s%-10s%-10d%-15s%-15s%-15d%-10b", id, name, age, workingDay, departmentId, dayOff, overtime);
+		System.out.println(String.format("%-10s%-20s%-10s%-15s%-15s%-15s%-10s", "ID", "Tên", "Tuổi", "Ngày làm", "ID bộ phận", "Ngày nghỉ", "Tăng ca"));
+		return String.format("%-10s%-20s%-10d%-15s%-15s%-15d%-10", id, name, age, workingDay, departmentId, dayOff, overtime);
 	}
 }

@@ -6,7 +6,6 @@ public abstract class Staff {
 	protected String name;
 	protected int age;
 	protected int coeffSalary ;
-	protected long salary;
 	protected String workingDay;
 	protected int departmentId;
 	protected int dayOff;
@@ -43,13 +42,6 @@ public abstract class Staff {
 		this.coeffSalary  = coeffSalary ;
 	}
 	
-	public long getSalary() {
-		return salary;
-	}
-
-	public void setSalary(long salary) {
-		this.salary = salary;
-	}
 
 	public String getWorkingDay() {
 		return workingDay;
