@@ -31,8 +31,8 @@ public class Service {
 		depts.add(d2);
 		depts.add(d3);
 
-		staffs.add(new Employee("IT 1", "TrongBB", 19, 5, "16/08/2020", 1, 5, 3));
-		staffs.add(new Employee("IT 2", "TrongBB", 20, 3, "01/09/2020", 1, 2, 1));
+//		staffs.add(new Employee("IT 1", "TrongBB", 19, 5, "16/08/2020", 1, 5, 3));
+//		staffs.add(new Employee("IT 2", "TrongBB", 20, 3, "01/09/2020", 1, 2, 1));
 	}
 
 	public void displayStaff() {
@@ -102,15 +102,18 @@ public class Service {
 		System.out.print("Nhập tên nhân viên: ");
 		String name = scan.nextLine();
 		System.out.print("Tuổi của nhân viên: ");
-		int age = scan.nextInt();
+		
+		
+		int age = inputData1("", 1);
+		
+		
 		System.out.print("Hệ số lương: ");
-		int coffSalary = scan.nextInt();
+		int coffSalary = inputData1("", 1);
 		System.out.print("Ngày làm việc: ");
-		String workingDay = scan.next();
+		String workingDay = scan.nextLine();
 //		Chọn bộ phận trong công ty
 		System.out.println("Bộ phận:");
 		displayDepartment();
-
 		System.out.print("Chọn bộ phận: ");
 		if (scan.hasNextInt()) {
 			departmentId = inputData("", 1, 3);
@@ -119,7 +122,7 @@ public class Service {
 		}
 
 		System.out.print("Ngày nghỉ: ");
-		int dayOff = scan.nextInt();
+		int dayOff = inputData1("", 1);
 //		Vị trí trong công ty
 		System.out.println("1. Nhân viên");
 		System.out.println("2. Quản lý");
@@ -161,7 +164,6 @@ public class Service {
 
 //	Nhập sai sẽ nhập lại
 	public int inputData(String message, int min, int max) {
-
 		int value = 0;
 		do {
 			System.out.print(message);
@@ -171,6 +173,21 @@ public class Service {
 			}
 			value = scan.nextInt();
 		} while (value < min || value > max);
+		return value;
+	}
+	
+//	Nhập sai nhập lại
+	public int inputData1(String message, int min) {
+
+		int value = 0;
+		do {
+			System.out.print(message);
+			while (!scan.hasNextInt()) {
+				scan.nextLine();
+				System.out.print(message);
+			}
+			value = scan.nextInt();
+		} while (value < min);
 		return value;
 	}
 
@@ -205,8 +222,8 @@ public class Service {
 		}
 	}
 
+//	In ra toàn bộ lương nhân viên toàn công ty(Theo thứ tự giảm dần)
 	public void showSalaryDesc() {
-
 		Collections.sort(staffs, new Comparator<Staff>() {
 			@Override
 			public int compare(Staff o1, Staff o2) {
@@ -226,7 +243,6 @@ public class Service {
 			}
 		});
 
-//		In ra toàn bộ lương nhân viên toàn công ty
 
 		System.out.println(String.format("%-10s%-20s%-10s", "ID", "Tên", "Lương"));
 
@@ -246,6 +262,7 @@ public class Service {
 
 	}
 
+//	Sắp xếp nhân viên theo thứ tự tăng dần
 	public void showSalaryAsc() {
 		Collections.sort(staffs, new Comparator<Staff>() {
 			@Override
@@ -259,6 +276,7 @@ public class Service {
 					salaryO1 = ((Employee) o1).calculateSalary();
 				}
 
+//				Lệnh if else rút gọn
 				salaryO2 = (o2 instanceof Manager) ? ((Manager) o2).calculateSalary()
 						: ((Employee) o2).calculateSalary();
 
@@ -267,7 +285,6 @@ public class Service {
 		});
 
 //		In ra toàn bộ lương nhân viên toàn công ty
-
 		System.out.println(String.format("%-10s%-20s%-10s", "ID", "Tên", "Lương"));
 
 		for (Staff staff : staffs) {
